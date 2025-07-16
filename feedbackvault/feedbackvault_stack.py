@@ -3,6 +3,7 @@ from aws_cdk import (
     aws_lambda as _lambda,
     aws_apigateway as apigw,
     aws_dynamodb as ddb,
+    RemovalPolicy,
     Duration
 )
 from constructs import Construct
@@ -15,7 +16,8 @@ class FeedbackvaultStack(Stack):
         table = ddb.Table(
             self, "FeedbackTable",
             partition_key={"name": "email", "type": ddb.AttributeType.STRING},
-            removal_policy=ddb.RemovalPolicy.DESTROY
+	    removal_policy=RemovalPolicy.DESTROY
+
         )
 
         # Lambda Function
